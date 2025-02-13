@@ -1,0 +1,31 @@
+{
+  "name": "school-management-project",
+  "version": "1.0.0",
+  "description": "my first complate MERN project front end and back end   using tailwind css  node.js react.js projec school management ",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeetendra169/school-management.git"
+  },
+  "author": "jeetendra prajapati",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeetendra169/school-management/issues"
+  },
+  "homepage": "https://github.com/jeetendra169/school-management#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.1.9"
+  }
+}
