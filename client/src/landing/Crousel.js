@@ -56,7 +56,7 @@ const Carousel = () => {
   }, []);
 
   return (
-    <div className="relative w-full mx-auto">
+    <div id="home" className="relative w-full mx-auto ">
       <div className="relative overflow-hidden">
         <div className="carousel-inner relative">
           {images.map((image, index) => (

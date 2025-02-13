@@ -4,7 +4,7 @@ function Studay() {
   return (
     <div className=" flex flex-col items-center justify-center min-h-screen p-4">
           <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8">
-            <div className="bg-blue-50 rounded-lg p-4 flex flex-col items-center">
+            <div className="bg-blue-100 rounded-lg p-4 flex flex-col items-center">
               <div className="bg-blue-500 text-white rounded-full p-2 mb-2">
                 <i className="fas fa-graduation-cap"></i>
               </div>

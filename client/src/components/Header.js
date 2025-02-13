@@ -1,25 +1,19 @@
 import React, { useState } from "react";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaTwitter,
-  FaLinkedinIn,
-} from "react-icons/fa";
-import logo from "../assets/images/logo1.png";
 import { Link } from "react-router-dom";
+import logo from "../assets/images/logo1.png";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="bg-[#0f3643]  w-full text-white shadow-lg">
+    <header className="fixed left-0 w-full bg-[#0f3643] text-white shadow-lg z-50">
       <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
-        {/* Logo and Login Button */}
+        {/* Logo */}
         <div className="flex items-center space-x-4">
           <img
             src={logo}
             alt="SkillBloom Logo"
-            className=" w-16 md:w-24 h-auto"
+            className="w-16 md:w-24 h-auto"
           />
         </div>
 
@@ -29,28 +23,33 @@ const Header = () => {
             isOpen ? "block" : "hidden"
           }`}
         >
-          {["Home", "About Us", "Courses", "Blogs", "Contact"].map(
-            (item, index) => (
-              <a
-                key={index}
-                href="#"
-                className="block md:inline-block hover:text-purple-400 transition duration-300 font-semibold py-2 md:py-0"
-                onClick={() => setIsOpen(false)}
-              >
-                {item}
-              </a>
-            )
-          )}
+          {[
+            { name: "Home", id: "home" },
+            { name: "About Us", id: "about" },
+            { name: "Team", id: "team" },
+            { name: "Blogs", id: "blogs" },
+            { name: "Contact", id: "contact" },
+          ].map((item, index) => (
+            <a
+              key={index}
+              href={`#${item.id}`}
+              className="relative block md:inline-block hover:text-purple-400 transition duration-300 font-semibold py-2 md:py-0 after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-purple-400 after:transition-all after:duration-300 hover:after:w-full focus:after:w-full"
+              onClick={() => setIsOpen(false)}
+            >
+              {item.name}
+            </a>
+          ))}
         </nav>
 
-        {/* Social Media Icons */}
-        <div className="flex md:flex space-x-4  p-4 rounded-lg">
-         <Link to="/login">
-         <button className="bg-purple-500 text-white px-8 py-2 rounded-lg hover:bg-purple-600 transition duration-300">
-            Login
-          </button>
-         </Link>
+        {/* Login Button */}
+        <div className="flex md:flex space-x-4 p-4 rounded-lg">
+          <Link to="/login">
+            <button className="bg-purple-500 text-white px-8 py-2 rounded-lg hover:bg-purple-600 transition duration-300">
+              Login
+            </button>
+          </Link>
         </div>
+
         {/* Mobile Menu Toggle */}
         <div className="md:hidden">
           <button
