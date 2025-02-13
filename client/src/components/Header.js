@@ -6,6 +6,7 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa";
 import logo from "../assets/images/logo1.png";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,9 +45,11 @@ const Header = () => {
 
         {/* Social Media Icons */}
         <div className="flex md:flex space-x-4  p-4 rounded-lg">
-          <button className="bg-purple-500 text-white px-8 py-2 rounded-lg hover:bg-purple-600 transition duration-300">
+         <Link to="/login">
+         <button className="bg-purple-500 text-white px-8 py-2 rounded-lg hover:bg-purple-600 transition duration-300">
             Login
           </button>
+         </Link>
         </div>
         {/* Mobile Menu Toggle */}
         <div className="md:hidden">

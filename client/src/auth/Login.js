@@ -1,52 +1,48 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../middleware/AuthContext";
 import registrationImg from "../assets/images/registrationimg.png";
 import { FaEye } from "react-icons/fa";
-import { useAuth } from "../middleware/AuthContext"
+
 const Login = () => {
-  
+  const { login } = useAuth();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
-  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError(""); // Reset error message
+    setError("");
 
     try {
-      const response = await fetch("api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      const role = await login(email, password); // Get role from login function
 
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log("response",data)
-        localStorage.setItem("token", data.token); // Save token
-        alert(data.message)
-        navigate("/dash"); // Redirect to dashboard
+      // Navigate to role-based routes
+      if (role === 0) {
+        navigate("/student");
+      } else if (role === 1) {
+        navigate("/admin");
+      } else if (role === 2) {
+        navigate("/staff");
+      } else if (role === 3) {
+        navigate("/parent");
       } else {
-        setError(data.message || "Invalid credentials");
+        navigate("/unauthorized");
       }
     } catch (err) {
-      setError("Something went wrong. Please try again.");
+      setError(err.message);
     }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 md:px-4 px-2">
       <div className="flex flex-col md:flex-row bg-white rounded-lg shadow-lg w-full md:w-3/4 overflow-hidden">
-        {/* Left Section - Background */}
         <div
           className="hidden md:block md:w-1/2 bg-cover bg-center"
           style={{ backgroundImage: `url(${registrationImg})` }}
         ></div>
-
-        {/* Right Section - Form */}
         <div className="w-full text-gray-500 md:w-1/2 p-6 md:p-8 flex flex-col justify-center">
           <h2 className="text-2xl md:text-4xl font-bold text-blue-900">
             Welcome to <span className="text-black">ABC</span>
@@ -54,15 +50,13 @@ const Login = () => {
           <p className="text-gray-500 text-sm mb-6">
             Where Financial Wisdom Meets Technology
           </p>
-
           <h3 className="text-2xl font-semibold text-blue-900 mt-6 md:mt-36">
             Log in with your credentials
           </h3>
-
           <form className="space-y-4 mt-4" onSubmit={handleLogin}>
             <div>
               <label className="block text-sm font-medium text-gray-700">
-                Username <span className="text-red-500">*</span>
+                Email <span className="text-red-500">*</span>
               </label>
               <input
                 type="email"
@@ -120,10 +114,7 @@ const Login = () => {
               Register here
             </span>
           </p>
-
         </div>
-
-
       </div>
     </div>
   );

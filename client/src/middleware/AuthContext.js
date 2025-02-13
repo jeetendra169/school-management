@@ -1,41 +1,42 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [role, setRole] = useState(null);
-  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const storedRole = localStorage.getItem("role");
-    if (storedRole) setRole(storedRole);
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) setUser(JSON.parse(storedUser));
   }, []);
 
-  const login = (userRole) => {
-    localStorage.setItem("role", userRole);
-    setRole(userRole);
-    navigate(getRedirectPath(userRole));
-  };
+  const login = async (email, password) => {
+    try {
+      const response = await axios.post("api/auth/login", { email, password });
 
-  const logout = () => {
-    localStorage.removeItem("role");
-    setRole(null);
-    navigate("/login");
-  };
-
-  const getRedirectPath = (role) => {
-    switch (role) {
-      case "0": return "/student";
-      case "1": return "/admin";
-      case "2": return "/staff";
-      case "3": return "/parent";
-      default: return "/unauthorized";
+      const data = response.data;
+      if (response.status === 200) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        setUser(data.user);
+        return data.user.role; // Return the user role for navigation
+      } else {
+        throw new Error(data.message || "Invalid credentials");
+      }
+    } catch (error) {
+      throw new Error(error.response?.data?.message || "Something went wrong.");
     }
   };
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ role, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
