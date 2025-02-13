@@ -1,8 +1,8 @@
 import { useState } from "react";
-import graf1 from "../assets/images/graf1.png";
-import graf2 from "../assets/images/graf2.png";
-import grafleft from "../assets/images/grafleft.png";
-import grafright from "../assets/images/grafright.png";
+import graf1 from "../../assets/images/graf1.png";
+import graf2 from "../../assets/images/graf2.png";
+import grafleft from "../../assets/images/grafleft.png";
+import grafright from "../../assets/images/grafright.png";
 import React from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";

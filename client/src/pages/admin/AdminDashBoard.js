@@ -1,8 +1,8 @@
 import { useState } from "react";
-import graf1 from "../assets/images/graf1.png";
-import graf2 from "../assets/images/graf2.png";
-import grafleft from "../assets/images/grafleft.png";
-import grafright from "../assets/images/grafright.png";
+import graf1 from "../../assets/images/graf1.png";
+import graf2 from "../../assets/images/graf2.png";
+import grafleft from "../../assets/images/grafleft.png";
+import grafright from "../../assets/images/grafright.png";
 import React from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
@@ -30,6 +30,19 @@ const data = [
   { name: "", value: 110 },
   { name: "", value: 1100 },
 ];
+let storedUser = localStorage.getItem("user");
+
+// JSON parse karna zaroori hai
+let user = storedUser ? JSON.parse(storedUser) : null;
+console.log(user, "user");
+if (user) {
+  const {
+    data: { firstName, lastName, email },
+  } = user;
+  console.log(firstName, lastName, email);
+} else {
+  console.log("User data not found in localStorage");
+}
 
 function AdminDashBoard() {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,9 +72,10 @@ function AdminDashBoard() {
             </button>
 
             <div>
-              <div className="p-6">
+              <div className="p-1 pt-6">
                 <h1 className="text-2xl font-bold text-purple-600 flex items-center">
-                  <MdDashboard className="mr-2" /> Dashboard
+                  <MdDashboard className="mr-2" />
+                  Admin Dashboard
                 </h1>
               </div>
               <nav className="mt-6">
@@ -83,13 +97,17 @@ function AdminDashBoard() {
                   </a>
                 ))}
               </nav>
-              
             </div>
             <div className="p-5 ">
-                <button className="px-16 bg-gradient-to-r from-violet-300 to-violet-500 text-black py-2 px-4 rounded-2xl">
-                  Upgrade to PRO to get access to all features!
-                </button>
-              </div>
+              <button className="px-16 bg-gradient-to-r from-violet-300 to-violet-500 text-black py-2 px-4 rounded-2xl">
+                Logout
+              </button>
+            </div>
+            <div className="p-5 ">
+              <button className="px-16 bg-gradient-to-r from-violet-300 to-violet-500 text-black py-2 px-4 rounded-2xl">
+                Upgrade to PRO to get access to all features!
+              </button>
+            </div>
           </div>
 
           {isOpen && (
@@ -102,7 +120,9 @@ function AdminDashBoard() {
           <div className="flex-1 p-6 overflow-auto bg-green-50">
             <div className="flex flex-col lg:flex-row justify-between items-center">
               <h2 className="text-3xl font-bold">
-                <span className="text-sm">Hi Andrei,</span>
+                <span className="text-sm">
+                  Hi {user.data.firstName + " " + user.data.lastName},
+                </span>
                 <br /> Welcome to Venus!
               </h2>
 

@@ -20,12 +20,12 @@ export const AuthProvider = ({ children }) => {
       });
   
       console.log("response", response);
-  
+   
       const data = response.data;
       if (response.status === 200 && data.success) {
         // Store token
         alert(response.data.message);
-        localStorage.setItem("token", data.token);
+        localStorage.setItem("token", data);
    
         // Store user data properly
         const userData = {
