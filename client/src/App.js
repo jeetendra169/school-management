@@ -10,19 +10,12 @@ import Login from "./auth/Login";
 import Landing from "./Landing";
 import Registration from "./auth/Registration";
 import Unauthorized from "./autentication/Unauthorized";
+import AdminDashBoard from "./pages/admin/AdminDashBoard";
+import StaffDashBoard from "./pages/staff/StaffDashBoard";
+import StudentDashBoard from "./pages/student/StudentDashBoard";
+import ParentsDashboard from "./pages/parents/ParentsDashboard";
 
-const AdminDashboard = () => (
-  <div className="p-5 text-center">Admin Dashboard</div>
-);
-const StaffDashboard = () => (
-  <div className="p-5 text-center">Staff Dashboard</div>
-);
-const StudentDashboard = () => (
-  <div className="p-5 text-center">Student Dashboard</div>
-);
-const ParentDashboard = () => (
-  <div className="p-5 text-center">Parent Dashboard</div>
-);
+
 
 const App = () => {
   return (
@@ -33,10 +26,10 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/staff" element={<StaffDashboard />} />
-          <Route path="/student" element={<StudentDashboard />} />
-          <Route path="/parent" element={<ParentDashboard />} />
+          <Route path="/admin" element={<AdminDashBoard />} />
+          <Route path="/staff" element={<StaffDashBoard />} />
+          <Route path="/student" element={<StudentDashBoard />} />
+          <Route path="/parent" element={<ParentsDashboard />} />
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </Router>

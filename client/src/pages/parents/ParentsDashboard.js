@@ -1,8 +1,8 @@
 import { useState } from "react";
-import graf1 from "../assets/images/graf1.png";
-import graf2 from "../assets/images/graf2.png";
-import grafleft from "../assets/images/grafleft.png";
-import grafright from "../assets/images/grafright.png";
+import graf1 from "../../assets/images/graf1.png";
+import graf2 from "../../assets/images/graf2.png";
+import grafleft from "../../assets/images/grafleft.png";
+import grafright from "../../assets/images/grafright.png";
 import React from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
@@ -31,7 +31,7 @@ const data = [
   { name: "", value: 1100 },
 ];
 
-function FormPage() {
+function ParentsDashboard() {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
@@ -414,4 +414,4 @@ function FormPage() {
   );
 }
 
-export default FormPage;
+export default ParentsDashboard;
