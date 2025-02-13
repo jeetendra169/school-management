@@ -31,7 +31,7 @@ const data = [
   { name: "", value: 1100 },
 ];
 
-function FormPage() {
+function ParentsDashboard() {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
@@ -414,4 +414,4 @@ function FormPage() {
   );
 }
 
-export default FormPage;
+export default ParentsDashboard;
