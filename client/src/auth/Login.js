@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import registrationImg from "../assets/images/registrationimg.png";
 import { FaEye } from "react-icons/fa";
-
+import { useAuth } from "../middleware/AuthContext"
 const Login = () => {
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
