@@ -20,14 +20,17 @@ const Login = () => {
       const role = await login(email, password); // Get role from login function
 
       // Navigate to role-based routes
-      if (role === 0) {
-        navigate("/student");
-      } else if (role === 1) {
+
+      console.log("role",role)
+       if (role === 1) {
         navigate("/admin");
       } else if (role === 2) {
         navigate("/staff");
       } else if (role === 3) {
         navigate("/parent");
+      } 
+      else if (role === 0) {
+        navigate("/student");
       } else {
         navigate("/unauthorized");
       }

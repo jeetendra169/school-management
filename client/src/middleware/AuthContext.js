@@ -29,10 +29,7 @@ export const AuthProvider = ({ children }) => {
    
         // Store user data properly
         const userData = {
-          _id: data._id,
-          firstName: data.firstName,
-          lastName: data.lastName,
-          email: data.email,
+         data
         };
   
         localStorage.setItem("user", JSON.stringify(userData));
