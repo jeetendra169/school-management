@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import { AuthProvider } from "./middleware/AuthContext";
 import Login from "./auth/Login";
 import Landing from "./Landing";
+import Registration from "./auth/Registration";
 
 
 const AdminDashboard = () => <div className="p-5 text-center">Admin Dashboard</div>;
@@ -18,7 +19,7 @@ const App = () => {
         <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/registration" element={<RegistrationForm />} />
+        <Route path="/registration" element={<Registration />} />
         
           <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path="/admin" element={<AdminDashboard />} />
