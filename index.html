@@ -1,0 +1,107 @@
+<html lang="en">
+<link>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Carousel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"></link>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+        const { useState } = React;
+
+        const Carousel = () => {
+            const images = [{
+    src: "https://placehold.co/800x400?text=Student+studying+with+books",
+    alt: "AI generated image of a student studying with books",
+  },
+  {
+    src: "https://placehold.co/800x400?text=Group+of+students+in+a+library",
+    alt: "AI generated image of a group of students in a library",
+  },
+  {
+    src: "https://placehold.co/800x400?text=Student+reading+a+book",
+    alt: "AI generated image of a student reading a book",
+  },
+  {
+    src: "https://placehold.co/800x400?text=Students+discussing+in+a+classroom",
+    alt: "AI generated image of students discussing in a classroom",
+  },
+  {
+    src: "https://placehold.co/800x400?text=Books+and+study+materials",
+    alt: "AI generated image of books and study materials",
+  },
+];
+            const [currentIndex, setCurrentIndex] = useState(0);
+
+            const prevSlide = () => {
+                const newIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
+                setCurrentIndex(newIndex);
+            };
+
+            const nextSlide = () => {
+                const newIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
+                setCurrentIndex(newIndex);
+            };
+
+            return (
+                <div className="relative w-full max-w-4xl mx-auto mt-8">
+                    <div className="relative overflow-hidden">
+                        <div className="carousel-inner relative w-full">
+                            {images.map((image, index) => (
+                                <div key={index} className={`carousel-item ${index === currentIndex ? 'block' : 'hidden'} w-full`}>
+                                    <img src={image.src} alt={image.alt} className="block w-full" />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <button onClick={prevSlide} className="absolute top-1/2 left-0 transform -translate-y-1/2 p-2 bg-gray-800 text-white rounded-full">
+                        <i className="fas fa-chevron-left"></i>
+                    </button>
+                    <button onClick={nextSlide} className="absolute top-1/2 right-0 transform -translate-y-1/2 p-2 bg-gray-800 text-white rounded-full">
+                        <i className="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            );
+        };
+
+        const App = () => (
+            <div>
+                <header className="bg-white shadow">
+                    <div className="container mx-auto px-4 py-6 flex justify-between items-center">
+                        <h1 className="text-2xl font-bold">My Website</h1>
+                        <nav>
+                            <ul className="flex space-x-4">
+                                <li><a href="#" className="text-gray-700 hover:text-gray-900">Home</a></li>
+                                <li><a href="#" className="text-gray-700 hover:text-gray-900">About</a></li>
+                                <li><a href="#" className="text-gray-700 hover:text-gray-900">Services</a></li>
+                                <li><a href="#" className="text-gray-700 hover:text-gray-900">Contact</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </header>
+                <main className="container mx-auto px-4 py-8">
+                    <Carousel />
+                </main>
+                <footer className="bg-white shadow mt-8">
+                    <div className="container mx-auto px-4 py-6 text-center">
+                        <p className="text-gray-700">© 2023 My Website. All rights reserved.</p>
+                    </div>
+                </footer>
+            </div>
+        );
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
