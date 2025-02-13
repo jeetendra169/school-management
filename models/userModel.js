@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema(
     {
         firstName: { type: String, },
         lastName: { type: String, },
-        mobileNumber: { type: String, required: true, unique: true },
+        mobileNumber: { type: String, required: true,},
         email: { type: String, required: true, unique: true },
         nationality: { type: String, },
         dob: { type: Date, },
@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema(
         experience: { type: Number, },
         website: { type: String, default: "" },
         password: { type: String, }, 
+        role: { type: Number, enum: [0, 1, 2, 3], default: 0 }, // Role with default as 0
     },
     { timestamps: true }
 );
