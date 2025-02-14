@@ -10,11 +10,12 @@ import Login from "./auth/Login";
 import Landing from "./Landing";
 import Registration from "./auth/Registration";
 import Unauthorized from "./autentication/Unauthorized";
-import AdminDashBoard from "./pages/admin/AdminDashBoard";
-import StaffDashBoard from "./pages/staff/StaffDashBoard";
-import StudentDashBoard from "./pages/student/StudentDashBoard";
-import ParentsDashboard from "./pages/parents/ParentsDashboard";
-
+import AdminProtectedRoute from "./Routes/AdminProtectedRoute";
+import SuperAdminProtectedRoute from "./Routes/SuperAdminProtectedRoute";
+import StaffProtectedRoute from "./Routes/StaffProtectedRoute";
+import AdminRoutes from "./Routes/AdminRoute";
+import SuperAdminRoute from "./Routes/SuperAdminRoute";
+import StaffRoute from "./Routes/StaffRoute";
 
 
 const App = () => {
@@ -25,11 +26,21 @@ const App = () => {
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registration" element={<Registration />} />
-          <Route path="/unauthorized" element={<Unauthorized />} />
-          <Route path="/admin" element={<AdminDashBoard />} />
-          <Route path="/staff" element={<StaffDashBoard />} />
-          <Route path="/student" element={<StudentDashBoard />} />
-          <Route path="/parent" element={<ParentsDashboard />} />
+          <Route path="/access-denied" element={<Unauthorized />} />
+  
+          <Route path="/admin/*" element={<AdminProtectedRoute />}>
+            <Route path="*" element={<AdminRoutes />} />
+          </Route>
+          <Route path="/superadmin/*" element={<SuperAdminProtectedRoute />}>
+            <Route path="*" element={<SuperAdminRoute />} />
+          </Route>
+
+          <Route path="/student/*" element={<StaffProtectedRoute />}>
+            <Route path="*" element={<StaffRoute />} />
+          </Route>
+
+
+          
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </Router>

@@ -18,6 +18,7 @@ const __dirname = path.dirname(__filename)
 app.use(cors());
 app.use(bodyParser.json());
 
+app.use("/api/v1/auth", authRoutes);
 app.use("/api/auth", authRoutes);
 
 app.use(express.static(path.join(__dirname,"./client/build")))

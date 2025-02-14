@@ -13,28 +13,27 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      console.log("doc", email, password);
-      const response = await axios.post("http://localhost:5000/api/auth/login", {
+      const response = await axios.post("/api/auth/login", {
         email,
         password,
       });
-  
       console.log("response", response);
-   
       const data = response.data;
       if (response.status === 200 && data.success) {
         // Store token
+
         alert(response.data.message);
-        localStorage.setItem("token", data);
-   
+
+        localStorage.setItem("token", response);
+
         // Store user data properly
         const userData = {
-         data
+          data,
         };
-  
+
         localStorage.setItem("user", JSON.stringify(userData));
         setUser(userData);
-  
+
         return data.role || 0; // Default to 0 if role is missing
       } else {
         throw new Error(data.message || "Invalid credentials");
@@ -44,7 +43,6 @@ export const AuthProvider = ({ children }) => {
       throw new Error(error.response?.data?.message || "Something went wrong.");
     }
   };
-  
 
   const logout = () => {
     localStorage.removeItem("token");

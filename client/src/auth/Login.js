@@ -18,10 +18,6 @@ const Login = () => {
 
     try {
       const role = await login(email, password); // Get role from login function
-
-      // Navigate to role-based routes
-
-      console.log("role",role)
        if (role === 1) {
         navigate("/admin");
       } else if (role === 2) {

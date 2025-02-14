@@ -22,7 +22,7 @@ const Unauthorized = () => {
           🚫 Access Denied! 🚫
         </motion.h1>
         <p className="text-lg mt-2 font-semibold">You do not have permission to access this page.</p>
-        <p className="text-md mt-1 text-gray-600">Please contact your administrator if you believe this is a mistake.</p>
+        <p className="text-md mt-1 text-gray-600">Please  Login...! if you believe this is a mistake.</p>
 
         <motion.button
           whileHover={{ scale: 1.1 }}

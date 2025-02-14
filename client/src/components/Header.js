@@ -1,10 +1,41 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/images/logo1.png";
+import { useAuth } from "../context/Auth.js";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [auth, setAuth] = useAuth();
+  const navigate = useNavigate();
 
+
+
+  const LoginFunction = () => {
+    // Check if auth data exists
+    if (!auth || !auth.user) {
+      // If no auth or user data exists, redirect to login page
+      navigate("/login");
+      return;
+    }
+
+    // Extract user role from auth
+    const role = auth.user.role;
+
+    // Based on the role, navigate to the respective page
+    if (role === 1) {
+      navigate("/admin");
+    } else if (role === 2) {
+      navigate("/staff");
+    } else if (role === 3) {
+      navigate("/parent");
+    } else if (role === 0) {
+      navigate("/student");
+    } else {
+      // If no valid role, redirect to login page or handle appropriately
+      navigate("/login");
+    }
+  };
+  
   return (
     <header className="fixed left-0 w-full bg-[#0f3643] text-white shadow-lg z-50">
       <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
@@ -16,7 +47,7 @@ const Header = () => {
             className="w-16 md:w-24 h-auto"
           />
         </div>
-{/* dssd */}
+        {/* dssd */}
         {/* Navigation */}
         <nav
           className={`absolute md:static top-18 left-0 w-full md:w-auto bg-[#0f3643] md:flex md:space-x-6 p-4 md:p-0 transition-all duration-300 ${
@@ -43,11 +74,12 @@ const Header = () => {
 
         {/* Login Button */}
         <div className="flex md:flex space-x-4 p-4 rounded-lg">
-          <Link to="/login">
-            <button className="bg-purple-500 text-white px-8 py-2 rounded-lg hover:bg-purple-600 transition duration-300">
-              Login
-            </button>
-          </Link>
+          <button
+            onClick={LoginFunction}
+            className="bg-purple-500 text-white px-8 py-2 rounded-lg hover:bg-purple-600 transition duration-300"
+          >
+            Login
+          </button>
         </div>
 
         {/* Mobile Menu Toggle */}
